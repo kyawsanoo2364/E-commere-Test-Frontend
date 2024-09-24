@@ -1,0 +1,84 @@
+const backend_domain = 'http://localhost:8080'
+
+const SummerApi = {
+    signup:{
+        url:`${backend_domain}/api/signup`,
+        method:"post"
+    },
+    signin:{
+        url:`${backend_domain}/api/signin`,
+        method:"post"
+    },
+    current_user:{
+        url:`${backend_domain}/api/user-details`,
+        method:"get"
+    },
+    logout:{
+        url:`${backend_domain}/api/logout`,
+        method:"get"
+    },
+    allUser:{
+        url:`${backend_domain}/api/all-user`,
+        method:"get"
+    },
+    updateUser:{
+        url:`${backend_domain}/api/update-user`,
+        method:"post"
+    },
+    uploadProduct:{
+        url:`${backend_domain}/api/upload-product`,
+        method:"post"
+    },
+    getAllProduct:{
+        url:`${backend_domain}/api/get-product`,
+        method:"get"
+    },
+    updateProduct:{
+        url:`${backend_domain}/api/update-product`,
+        method:"post"
+    },
+    getCategoryProduct:{
+        url:`${backend_domain}/api/get-categoryProduct`,
+        method:"get"
+    },
+    getCategoryWiseProduct:{
+        url:`${backend_domain}/api/category-products`,
+        method:"post"
+    },
+    getProductDetails:{
+        url:(_id)=>{
+            return `${backend_domain}/api/product/${_id}`
+        },
+        method:"get"
+    },
+    addToCart:{
+        url:`${backend_domain}/api/addToCart`,
+        method:"post"
+    },
+    addToCartCount:{
+        url:`${backend_domain}/api/addToCart-count`,
+        method:"get"
+    },
+    addToCartProductView:{
+        url:`${backend_domain}/api/product-cart-view`,
+        method:"get"
+    },
+    updateProductCart:{
+        url:`${backend_domain}/api/update-productCart`,
+        method:"post"
+    },
+    deleteProductCart:{
+        url:`${backend_domain}/api/delete-cart-product`,
+        method:"post"
+    },
+    searchProduct:{
+        url:`${backend_domain}/api/search`,
+        method:"get"
+    },
+    filterProduct:{
+        url:`${backend_domain}/api/filter-product`,
+        method:"post"
+    }
+}
+
+export default SummerApi;

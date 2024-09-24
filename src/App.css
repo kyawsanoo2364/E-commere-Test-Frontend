@@ -1,0 +1,12 @@
+.userTable th{
+    @apply border bg-white text-base font-medium
+}
+.userTable {
+    @apply bg-white p-4
+}
+.userTable td{
+    @apply p-2 text-base text-center border 
+}
+.scrollbar-none::-webkit-scrollbar{
+    display:none;
+}
