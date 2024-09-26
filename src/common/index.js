@@ -1,4 +1,6 @@
-const backend_domain = process.env.BACKEND_URL;
+const backend_domain = "https://e-commere-test-backend.onrender.com";
+
+
 
 const SummerApi = {
     signup:{

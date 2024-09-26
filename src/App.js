@@ -49,6 +49,8 @@ function App() {
     fetchAddToCartProductCount()
   },[])
 
+  console.log(process.env.BACKEND_URL)
+
   return (
   <>
   <Context.Provider value={{fetchUserData,addToCartProductCount,fetchAddToCartProductCount}}>
