@@ -1,4 +1,4 @@
-const backend_domain = 'http://localhost:8080'
+const backend_domain = process.env.BACKEND_URL;
 
 const SummerApi = {
     signup:{
