@@ -78,6 +78,14 @@ const SummerApi = {
     filterProduct:{
         url:`${backend_domain}/api/filter-product`,
         method:"post"
+    },
+    paymentCheckout:{
+        url:`${backend_domain}/api/checkout`,
+        method:"post"
+    },
+    getOrderList:{
+        url:`${backend_domain}/api/order-list`,
+        method:"get"
     }
 }
 

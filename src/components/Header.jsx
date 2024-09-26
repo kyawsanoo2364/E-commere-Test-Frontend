@@ -87,15 +87,24 @@ const Header = () => {
                   <FaRegCircleUser />
                 )}
               </div>
-              {menuDisplay && user?.role === role.ADMIN && (
+              {menuDisplay && user && (
                 <div className="h-fit absolute bottom-0 top-10 bg-white p-4 shadow-lg rounded hidden md:block">
-                  <nav>
+                  <nav className="flex flex-col">
+                    {user?.role === role.ADMIN && 
                     <Link
                       to={"admin-panel"}
                       className="whitespace-nowrap hover:bg-slate-100 p-2"
                       onClick={() => setMenuDisplay(!menuDisplay)}
                     >
                       Admin Panel
+                    </Link>
+}
+                    <Link
+                      to={"order"}
+                      className="whitespace-nowrap hover:bg-slate-100 p-2"
+                      onClick={() => setMenuDisplay(!menuDisplay)}
+                    >
+                      Order
                     </Link>
                   </nav>
                 </div>

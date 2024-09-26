@@ -3,6 +3,8 @@ import SummerApi from '../common';
 import Context from '../context';
 import displayMMKCurrency from '../helpers/displayMMKCurrency';
 import { MdDelete } from "react-icons/md";
+import {useNavigate} from "react-router-dom"
+import {loadStripe} from '@stripe/stripe-js';
 
 const Cart = () => {
     const [data,setData] = useState([]);
@@ -11,6 +13,7 @@ const Cart = () => {
     const loadingList = new Array(addToCartProductCount).fill(null);
     const totalQuantity = data.reduce((prev,curr)=>prev + curr.quantity,0);
     const totalPrice =data.reduce((prev,curr)=>prev +( curr?.productId?.sellingPrice * curr?. quantity),0);
+    const navigate = useNavigate()
     
 
     const fetchData = async ()=>{
@@ -85,8 +88,30 @@ const Cart = () => {
         setLoading(false)
     },[])
 
+    const handlePayment =async()=>{
+       // console.log(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
+        const stripePromise =await  loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+        const fetchRes = await fetch(SummerApi.paymentCheckout.url,{
+            method:SummerApi.paymentCheckout.method,
+            credentials:"include",
+            headers:{
+                "content-type":"application/json"
+            },
+            body:JSON.stringify({
+                cartItems:data
+            })
+        
+        })
+
+        const dataRes = await fetchRes.json();
+        if(dataRes?.id){
+            stripePromise.redirectToCheckout({sessionId:dataRes.id})
+        }       
+    
+    }
+
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto min-h-[calc(100vh-100px)]'>
         <div className='text-center text-lg my-5'>
         {!loading && data.length === 0 && <div className='bg-white py-5'>No Data</div>}
         </div>
@@ -135,6 +160,7 @@ const Cart = () => {
                      
                     </div>
                 ):(
+ 
                     <div className='h-32  mt-5 lg:mt-0 w-full bg-white'>
                       <h2 className='bg-red-600 text-white py-1 px-2'>Summary</h2>
                       <div className='flex justify-between gap-2 px-4 '>
@@ -145,7 +171,7 @@ const Cart = () => {
                         <p>Total Price</p>
                         <p>{displayMMKCurrency(totalPrice)}</p>
                       </div>
-                      <button className='bg-blue-600 text-white p-2 mt-3 w-full'>Payment</button>
+                      <button className='bg-blue-600 text-white p-2 mt-3 w-full' onClick={()=>handlePayment()}>Payment</button>
                     </div>
                 )}
             </div>
